@@ -1,11 +1,12 @@
 import { CountryCard } from "@/components/molecules/CountryCard";
 import { CountrySearch } from "@/components/molecules/CountrySearch";
 import { Dropdown } from "@/components/molecules/Dropdown";
+import { ContentTemplate } from "@/components/templates/ContentTemplate";
 import { Regions } from "@/utils/constants";
 
 export default function Home() {
     return (
-        <main className="px-6 md:px-8 lg:px-10 flex flex-col xl:max-w-screen-xl xl:mx-auto">
+        <ContentTemplate>
             <CountrySearch />
             <Dropdown
                 triggerProps={{ placeholder: "Filter by Region" }}
@@ -18,7 +19,7 @@ export default function Home() {
                     return (
                         <CountryCard
                             key={item}
-                            image="https://via.placeholder.com/400x400"
+                            imageSrc="https://via.placeholder.com/400x400"
                             name="Germany"
                             capital="Berlin"
                             population="87,777,777"
@@ -27,6 +28,6 @@ export default function Home() {
                     );
                 })}
             </section>
-        </main>
+        </ContentTemplate>
     );
 }
