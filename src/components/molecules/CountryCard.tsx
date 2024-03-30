@@ -28,7 +28,7 @@ export const CountryCard = ({
                 />
             </div>
             <div className="p-6 dark:bg-dark-blue rounded-b-md">
-                <p className="text-lg font-bold mb-4">{name}</p>
+                <p className="text-lg font-bold mb-4 md:text-xl">{name}</p>
                 <CardRow title="Population" value={population} />
                 <CardRow title="Region" value={region} />
                 <CardRow title="Capital" value={capital} />

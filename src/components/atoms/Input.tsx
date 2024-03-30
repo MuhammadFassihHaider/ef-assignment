@@ -8,7 +8,7 @@ export const Input = ({ className, ...props }: TProps) => {
         <input
             {...props}
             className={cn(
-                "py-3 px-4 outline-none border rounded-md shadow-md dark:bg-dark-blue dark:border-very-dark-blue dark:text-white",
+                "py-3 md:py-4 px-4 md:px-5 outline-none border rounded-md shadow-md dark:bg-dark-blue dark:border-very-dark-blue dark:text-white md:text-lg",
                 className
             )}
         />

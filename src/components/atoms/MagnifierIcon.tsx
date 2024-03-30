@@ -8,9 +8,10 @@ export const MagnifierIcon = ({ className, ...props }: TProps) => {
     return (
         <IoSearch
             {...props}
-            width={props.width ?? 20}
-            height={props.height ?? 20}
-            className={cn("text-gray-400 dark:bg-dark-blue dark:text-white", className)}
+            className={cn(
+                "text-gray-400 dark:bg-dark-blue dark:text-white h-4 w-4 md:h-5 md:w-5",
+                className
+            )}
         />
     );
 };

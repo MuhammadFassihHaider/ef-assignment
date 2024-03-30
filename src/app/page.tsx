@@ -5,7 +5,7 @@ import { Regions } from "@/utils/constants";
 
 export default function Home() {
     return (
-        <main className="px-6 flex flex-col">
+        <main className="px-6 md:px-8 lg:px-10 flex flex-col xl:max-w-screen-xl xl:mx-auto">
             <CountrySearch />
             <Dropdown
                 triggerProps={{ placeholder: "Filter by Region" }}
@@ -13,7 +13,7 @@ export default function Home() {
                 dropdownItems={Regions}
             />
 
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4">
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3">
                 {new Array(15).fill(0).map((item) => {
                     return (
                         <CountryCard

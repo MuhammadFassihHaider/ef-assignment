@@ -36,13 +36,16 @@ export const Dropdown = ({
         <div
             ref={itemsContainerRef}
             {...containerProps}
-            className={cn("relative max-w-max", containerProps?.className)}
+            className={cn(
+                "relative max-w-max lg:max-w-none lg:min-w-[230px]",
+                containerProps?.className
+            )}
         >
             <button
                 {...triggerProps}
                 onClick={() => setOpen((prev) => !prev)}
                 className={cn(
-                    "flex items-center justify-between px-4 py-3 rounded-md shadow-md dark:bg-dark-blue w-48 text-gray-400",
+                    "flex items-center justify-between py-3 md:py-4 px-4 md:px-5 rounded-md shadow-md dark:bg-dark-blue w-48 text-gray-400 md:text-lg text-nowrap lg:min-w-[230px]",
                     triggerProps.className
                 )}
             >
@@ -53,13 +56,12 @@ export const Dropdown = ({
                         open ? "rotate-180" : ""
                     )}
                 />
-                {/* {open ? <ChevronDownIcon /> :} */}
             </button>
 
             {open && (
                 <div
                     className={cn(
-                        "absolute min-h-[48px] rounded-md shadow-md dark:bg-dark-blue mt-1.5 w-48 z-50 flex flex-col"
+                        "absolute min-h-[48px] rounded-md shadow-md dark:bg-dark-blue mt-1.5 w-48 z-50 flex flex-col lg:min-w-[230px]"
                     )}
                 >
                     {dropdownItems.map(({ key, value }) => (
@@ -67,7 +69,7 @@ export const Dropdown = ({
                             <li
                                 key={key}
                                 onClick={() => onClick && onClick(key, value)}
-                                className="cursor-pointer hover:bg-very-dark-blue rounded-md py-2 px-4 hover:text-white dark:hover:text-white"
+                                className="cursor-pointer hover:bg-very-dark-blue rounded-md py-2 px-4 md:py-3 md:px-5 md:text-lg hover:text-white dark:hover:text-white"
                             >
                                 {value}
                             </li>
