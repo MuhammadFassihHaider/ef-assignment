@@ -9,16 +9,21 @@ type TTriggerProps = Omit<ComponentProps<"button">, "children"> & {
     placeholder: string;
 };
 
-type TDropdownItemProps = ComponentProps<"p">
+type TContainerProps = ComponentProps<"div">;
 
 type TProps = {
     triggerProps: TTriggerProps;
-    dropdownItemProps?: TDropdownItemProps
+    containerProps?: TContainerProps;
     dropdownItems: TDropdownItem<number, string>[];
     onClick?: (key: number, value: string) => void;
 };
 
-export const Dropdown = ({ dropdownItems, triggerProps, onClick }: TProps) => {
+export const Dropdown = ({
+    dropdownItems,
+    triggerProps,
+    onClick,
+    containerProps,
+}: TProps) => {
     const [open, setOpen] = useState(false);
     const itemsContainerRef = useRef(null);
 
@@ -28,7 +33,11 @@ export const Dropdown = ({ dropdownItems, triggerProps, onClick }: TProps) => {
 
     onClickOutsideDropdown(itemsContainerRef, onClickOutside);
     return (
-        <div className="relative">
+        <div
+            ref={itemsContainerRef}
+            {...containerProps}
+            className={cn("relative max-w-max", containerProps?.className)}
+        >
             <button
                 {...triggerProps}
                 onClick={() => setOpen((prev) => !prev)}
@@ -38,22 +47,31 @@ export const Dropdown = ({ dropdownItems, triggerProps, onClick }: TProps) => {
                 )}
             >
                 {triggerProps.placeholder}
-                {open ? <ChevronDownIcon /> : <ChevronUpIcon />}
+                <ChevronUpIcon
+                    className={cn(
+                        "transform transition-transform",
+                        open ? "rotate-180" : ""
+                    )}
+                />
+                {/* {open ? <ChevronDownIcon /> :} */}
             </button>
 
             {open && (
                 <div
-                    ref={itemsContainerRef}
-                    className="absolute min-h-[48px] rounded-md shadow-md dark:bg-dark-blue mt-1.5 w-48 z-50 flex flex-col"
+                    className={cn(
+                        "absolute min-h-[48px] rounded-md shadow-md dark:bg-dark-blue mt-1.5 w-48 z-50 flex flex-col"
+                    )}
                 >
                     {dropdownItems.map(({ key, value }) => (
-                        <p
-                            key={key}
-                            onClick={() => onClick && onClick(key, value)}
-                            className="cursor-pointer hover:bg-very-dark-blue rounded-md py-2 px-4 hover:text-white dark:hover:text-white"
-                        >
-                            {value}
-                        </p>
+                        <ul>
+                            <li
+                                key={key}
+                                onClick={() => onClick && onClick(key, value)}
+                                className="cursor-pointer hover:bg-very-dark-blue rounded-md py-2 px-4 hover:text-white dark:hover:text-white"
+                            >
+                                {value}
+                            </li>
+                        </ul>
                     ))}
                 </div>
             )}

@@ -23,11 +23,11 @@ export const ThemeSwitchButton = ({ themeToSet }: TProps) => {
 
     return (
         <button
-            className="flex items-center gap-x-2 font-semibold"
+            className="flex items-center gap-x-2 md:gap-x-3 font-semibold"
             onClick={() => setTheme(themeToSet)}
         >
             <Icon />
-            {label}
+            <span className={"min-w-[93px] md:text-lg"}>{label} Mode</span>
         </button>
     );
 };

@@ -1,7 +1,10 @@
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 
 export const NavigationHeading = () => {
-  return (
-    <h1 className='text-xl font-bold'>Where in the world?</h1>
-  )
-}
+    return (
+        <h1 className="text-xl md:text-2xl font-bold">
+            <Link href={"/"}>Where in the world?</Link>
+        </h1>
+    );
+};

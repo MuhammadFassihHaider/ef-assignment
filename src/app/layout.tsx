@@ -19,7 +19,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={cn(nunito.className, "px-6 pb-6 dark:bg-very-dark-blue")}>
+            <body
+                className={cn(nunito.className, "pb-6 dark:bg-very-dark-blue")}
+            >
                 <ThemeProvider>
                     <NavigationBar />
                     {children}
