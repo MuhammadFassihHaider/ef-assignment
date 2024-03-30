@@ -8,21 +8,22 @@ export default function CountryDetails() {
     return (
         <ContentTemplate>
             <BackButton className="mb-16" />
-            <CountryFlag imageSrc="https://via.placeholder.com/1000x1000" />
-            <section>
-                <CountryStats
-                    name={"Belgium"}
-                    nativeName={"Belgie"}
-                    population={"87,777,777"}
-                    region={"Europe"}
-                    subRegion={"Western Europe"}
-                    capital={"Brussels"}
-                    topLevelDomain={".be"}
-                    currencies={"Euro"}
-                    languages={"Dutch, French, German"}
-                />
-                <h2 className="text-xl font-bold mb-6">Border Countries</h2>
-                <BorderCountryChips />
+            <section className="flex flex-col lg:flex-row lg:space-x-20 xl:justify-between lg:items-center">
+                <CountryFlag imageSrc="https://via.placeholder.com/1000x1000" />
+                <div>
+                    <CountryStats
+                        name={"Belgium"}
+                        nativeName={"Belgie"}
+                        population={"87,777,777"}
+                        region={"Europe"}
+                        subRegion={"Western Europe"}
+                        capital={"Brussels"}
+                        topLevelDomain={".be"}
+                        currencies={"Euro"}
+                        languages={"Dutch, French, German"}
+                    />
+                    <BorderCountryChips />
+                </div>
             </section>
         </ContentTemplate>
     );
