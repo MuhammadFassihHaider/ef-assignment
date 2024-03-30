@@ -3,9 +3,11 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
+import { ThemeSwitchButton } from "../atoms/ThemeSwitchButton";
+
 export const ThemeSwitcher = () => {
     const [mounted, setMounted] = useState(false);
-    const { setTheme, resolvedTheme } = useTheme();
+    const { resolvedTheme } = useTheme();
 
     useEffect(() => setMounted(true), []);
 
@@ -14,11 +16,10 @@ export const ThemeSwitcher = () => {
     }
 
     if (resolvedTheme === "dark") {
-        return <button onClick={() => setTheme("light")}>Light</button>;
+        return <ThemeSwitchButton themeToSet="light" />;
     }
-    
+
     if (resolvedTheme === "light") {
-        return <button onClick={() => setTheme("dark")}>Dark</button>;
+        return <ThemeSwitchButton themeToSet="dark" />;
     }
-    return <div>ThemeSwitcher</div>;
 };

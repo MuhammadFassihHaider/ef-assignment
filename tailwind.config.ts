@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'dark-blue': 'hsl(209,23%,22%)',
-        'very-dark-blue': 'hsl(207,26%,17%)',
+        'dark-blue': '#2B3743',
+        'very-dark-blue': '#202D36',
         'very-light-blue': 'hsl(200,15%,8%)',
         'dark-gray': 'hsl(0,0%,52%)',
         'very-light-gray': 'hsl(0,0%,98%)',

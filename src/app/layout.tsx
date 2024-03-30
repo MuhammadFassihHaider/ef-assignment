@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/layout/theme-provider";
+import { ThemeProvider } from "@/components/templates/ThemeProvider";
+import { NavigationBar } from "@/components/organisms/NavigationBar";
+import { cn } from "@/utils/cn";
 
 const nunito = Nunito_Sans({ subsets: ["latin"] });
 
@@ -17,8 +19,11 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={nunito.className}>
-                <ThemeProvider>{children}</ThemeProvider>
+            <body className={cn(nunito.className, "px-6 pb-6 dark:bg-very-dark-blue")}>
+                <ThemeProvider>
+                    <NavigationBar />
+                    {children}
+                </ThemeProvider>
             </body>
         </html>
     );
