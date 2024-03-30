@@ -4,11 +4,11 @@ import { useMemo } from "react";
 import { MoonIconFill } from "./MoonIconFill";
 import { MoonIconOutline } from "./MoonIconOutline";
 
-type Props = {
+type TProps = {
     themeToSet: "light" | "dark";
 };
 
-export const ThemeSwitchButton = ({ themeToSet }: Props) => {
+export const ThemeSwitchButton = ({ themeToSet }: TProps) => {
     const { setTheme } = useTheme();
 
     const Icon = useMemo(

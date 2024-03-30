@@ -2,9 +2,9 @@ import React from "react";
 import { IoSearch } from "react-icons/io5";
 import { cn } from "@/utils/cn";
 
-type Props = Parameters<typeof IoSearch>[0];
+type TProps = Parameters<typeof IoSearch>[0];
 
-export const MagnifierIcon = ({ className, ...props }: Props) => {
+export const MagnifierIcon = ({ className, ...props }: TProps) => {
     return (
         <IoSearch
             {...props}

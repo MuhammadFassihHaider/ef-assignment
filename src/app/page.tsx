@@ -1,12 +1,15 @@
-import { Input } from "@/components/atoms/Input";
-import { NavigationHeading } from "@/components/atoms/NavigationHeading";
-import { ThemeSwitcher } from "@/components/molecules/ThemeSwitcher";
 import { CountrySearch } from "@/components/molecules/CountrySearch";
+import { Dropdown } from "@/components/molecules/Dropdown";
+import { Regions } from "@/utils/constants";
 
 export default function Home() {
     return (
         <main className="">
             <CountrySearch />
+            <Dropdown
+                triggerProps={{ placeholder: "Filter by Region" }}
+                dropdownItems={Regions}
+            />
         </main>
     );
 }

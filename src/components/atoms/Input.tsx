@@ -1,9 +1,9 @@
 import { cn } from "@/utils/cn";
 import React from "react";
 
-type Props = React.ComponentProps<"input">;
+type TProps = React.ComponentProps<"input">;
 
-export const Input = ({ className, ...props }: Props) => {
+export const Input = ({ className, ...props }: TProps) => {
     return (
         <input
             {...props}
