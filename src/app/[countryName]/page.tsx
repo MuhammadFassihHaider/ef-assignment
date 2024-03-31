@@ -1,31 +1,58 @@
 import { BackButton } from "@/components/molecules/BackButton";
 import { ContentTemplate } from "@/components/templates/ContentTemplate";
+import { formatPopulation } from "@/utils/formatPopulation";
+import { getCountryByCountryCode } from "@/utils/getCountryByCountryCode";
+import { getCountryByName } from "@/utils/getCountryByName";
 import { BorderCountryChips } from "./BorderCountryChips";
 import { CountryFlag } from "./CountryFlag";
 import { CountryStats } from "./CountryStats";
-import { getCountryByName } from "@/utils/getCountryByName";
-import { formatPopulation } from "@/utils/formatPopulation";
-import { getCountryByCountryCode } from "@/utils/getCountryByCountryCode";
+// import { notFound } from "next/navigation";
+import { customError } from "@/utils/customError";
 
 type TContext = {
-    params: { countryName: string };
+    params?: { countryName?: string };
 };
 
 export default async function CountryDetails(context: TContext) {
-    let countryDetails = await getCountryByName(context.params.countryName);
+    if (!context?.params?.countryName) {
+        throw customError("Bad request!", 400);
+    }
+
+    let countryDetails: TCountry | null = null;
+
+    try {
+        const response = await getCountryByName(context.params.countryName);
+
+        if (response.hasError) {
+            countryDetails = null;
+        } else {
+            countryDetails = response.data;
+        }
+    } catch (error) {
+        countryDetails = null;
+    }
+
+    //	=======================================================================
+    //		Handle error if fail to get country details by country name.
+    //      Try with country code. Reason is explained below. I could just
+    //      check if the length of the string is 3, that means it is country
+    //      code. It would save an API request I do not know any country name
+    //      with only three letters but seems risky
+    //	=======================================================================
 
     if (!countryDetails) {
-        // TODO
         try {
-            countryDetails = await getCountryByCountryCode(
+            const response = await getCountryByCountryCode(
                 context.params.countryName
             );
 
-            if (!countryDetails) {
-                return <>Error</>;
+            if (response.hasError) {
+                throw customError(response.message, response.code);
             }
+
+            countryDetails = response.data;
         } catch (error) {
-            return <>Error</>;
+            throw customError("Something went wrong!", 500);
         }
     }
 
@@ -40,15 +67,20 @@ export default async function CountryDetails(context: TContext) {
     const population = formatPopulation(countryDetails.population.toString());
     const topLevelDomain = countryDetails.tld.join(", ");
 
-    // Could not get border country names from symbol because the endpoint is probably rate limited
-    // Could get the names by adding time between api calls but does not seem worth it to do that. It
-    // will just increase the page load time. To counter that, if I do not find the country by name,
-    // I search by the symbol
-
-    // const countryBorderPromises = countryDetails.borders.map((border) =>
-    //     getCountryByCountryCode(border)
-    // );
-    // const borders = await Promise.all(countryBorderPromises);
+    //	=======================================================================
+    //   Could not get border country names from symbol because
+    //   the endpoint is probably rate limited. I could get the names
+    //   by adding time between api calls but it does not seem worth it to do that.
+    //   It will just increase the page load time. To counter that, if I do not
+    //   find the country by name, I search by the symbol. In the border chips,
+    //   I just show the country symbols
+    /* 
+            const countryBorderPromises = countryDetails.borders.map((border) =>
+                getCountryByCountryCode(border)
+            );
+            const borders = await Promise.all(countryBorderPromises);
+    */
+    //	=======================================================================
 
     return (
         <ContentTemplate>

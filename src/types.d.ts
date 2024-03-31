@@ -46,3 +46,16 @@ type TCountry = {
     population: number;
     region: string;
 };
+
+type TCustomError = { message: string; code: string };
+
+type TError<T> =
+    | {
+          data: T;
+          hasError: false;
+      }
+    | {
+          hasError: true;
+          code: number;
+          message: string;
+      };

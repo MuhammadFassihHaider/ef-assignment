@@ -1,19 +1,29 @@
-export const getCountryByCountryCode = async (code: string) => {
+export const getCountryByCountryCode = async (
+    code: string
+): Promise<TError<TCountry>> => {
     try {
         const response = await fetch(
             `https://restcountries.com/v3.1/alpha/${code}?fields=name,capital,population,flags,subregion,currencies,languages,flag,borders,tld,region`
         );
 
         if (!response.ok) {
-            return null;
+            return {
+                hasError: true,
+                code: response.status,
+                message:
+                    response.statusText || "Could not get country details!",
+            };
         }
-        // TODO: handle error since single country endpoint returns array.
-        // what if the user changes the url by themselves
+
         const data: TCountry = await response.json();
 
-        return data;
+        return { data, hasError: false };
     } catch (error) {
         console.log(error);
-        return null;
+        return {
+            hasError: true,
+            code: 500,
+            message: "Something went wrong!",
+        };
     }
 };

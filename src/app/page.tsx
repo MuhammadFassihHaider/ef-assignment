@@ -1,16 +1,20 @@
 import { ContentTemplate } from "@/components/templates/ContentTemplate";
 import { getAllCountries } from "@/utils/getAllCountries";
 import { HomeMainContent } from "./HomeMainContent";
+import { customError } from "@/utils/customError";
 
 export default async function Home() {
-    const countries = await getAllCountries();
+    const response = await getAllCountries();
 
-    if (!countries || countries.length === 0) {
-        // TODO
-        return <>Error</>;
+    if (response.hasError) {
+        throw customError(response.message, response.code);
     }
 
-    const countriesSorted = countries.sort((a, b) => {
+    //	=======================================================================
+    //				Sort country names alphabetically.
+    //	=======================================================================
+
+    const countriesSorted = response.data.sort((a, b) => {
         return a.name.common < b.name.common ? -1 : 1;
     });
 
