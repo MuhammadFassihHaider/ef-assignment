@@ -1,5 +1,5 @@
 "use client";
-import { onClickOutsideDropdown } from "@/hooks/useOnClickOutside";
+import { useClickOutsideDropdown } from "@/hooks/useOnClickOutside";
 import { cn } from "@/utils/cn";
 import { ComponentProps, useCallback, useRef, useState } from "react";
 import { ChevronUpIcon } from "../atoms/ChevronUpIcon";
@@ -32,7 +32,7 @@ export const Dropdown = ({
         setOpen(false);
     }, []);
 
-    onClickOutsideDropdown(itemsContainerRef, onClickOutside);
+    useClickOutsideDropdown(itemsContainerRef, onClickOutside);
 
     return (
         <div
@@ -66,8 +66,8 @@ export const Dropdown = ({
                         "absolute min-h-[48px] rounded-md shadow-md dark:bg-dark-blue mt-1.5 w-48 z-50 flex flex-col lg:min-w-[230px] bg-white"
                     )}
                 >
-                    {dropdownItems.map(({ key, value }) => (
-                        <ul>
+                    <ul>
+                        {dropdownItems.map(({ key, value }) => (
                             <li
                                 key={key}
                                 onClick={() => onClick && onClick(key, value)}
@@ -79,8 +79,8 @@ export const Dropdown = ({
                             >
                                 {value}
                             </li>
-                        </ul>
-                    ))}
+                        ))}
+                    </ul>
                 </div>
             )}
         </div>

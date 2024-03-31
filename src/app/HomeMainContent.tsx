@@ -50,6 +50,8 @@ export const HomeMainContent = ({ countries }: TProps) => {
         );
     }
 
+    // TODO: add pagination
+
     const countriesToRender = countriesWithFilters.map((country) => {
         return (
             <CountryCard

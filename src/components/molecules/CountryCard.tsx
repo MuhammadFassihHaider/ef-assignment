@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { StatRow } from "../atoms/StatRow";
 import { useCallback } from "react";
+import Image from "next/image";
 
 type TProps = {
     name: string;
@@ -24,19 +25,19 @@ export const CountryCard = ({
 
     const onClickCard = useCallback(() => {
         router.push(name);
-    }, []);
+    }, [name, router]);
 
     return (
         <div
             className="shadow-md hover:scale-[102%] transition cursor-pointer w-full border dark:border-dark-blue rounded-md overflow-hidden"
             onClick={onClickCard}
         >
-            <div className="overflow-hidden rounded-t-md">
-                <img
+            <div className="overflow-hidden rounded-t-md w-full h-48 relative">
+                <Image
                     src={imageSrc}
                     alt={imageAlt}
-                    className="w-full h-48 object-cover object-center"
-                    height={300}
+                    className=" object-cover object-center"
+                    fill
                 />
             </div>
             <div className="p-6 dark:bg-dark-blue rounded-b-md h-full">

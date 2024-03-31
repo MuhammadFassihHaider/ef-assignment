@@ -1,16 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-export const onClickOutsideDropdown = (ref: React.RefObject<any>, callback: Function) => {
+export const useClickOutsideDropdown = (
+    ref: React.RefObject<any>,
+    callback: Function
+) => {
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (ref.current && !ref.current.contains(event.target as Node)) {
-                callback()
+                callback();
             }
         }
 
-        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside);
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [ref, callback]);
 };
