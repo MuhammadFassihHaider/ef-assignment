@@ -1,7 +1,7 @@
 import React from "react";
 
 type TProps = {
-    children: React.ReactNode;
+    children: Readonly<React.ReactNode>;
 };
 
 export const ContentTemplate = ({ children }: TProps) => {

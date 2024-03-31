@@ -1,8 +1,14 @@
 "use client";
+import { ChangeEventHandler } from "react";
 import { Input } from "../atoms/Input";
 import { MagnifierIcon } from "../atoms/MagnifierIcon";
 
-export const CountrySearch = () => {
+type TProps = {
+    value: string;
+    onChange: ChangeEventHandler<HTMLInputElement>;
+};
+
+export const CountrySearch = ({ onChange, value }: TProps) => {
     return (
         <div className="relative mb-10">
             {/* Intentionally kept the paddings around search small */}
@@ -11,6 +17,8 @@ export const CountrySearch = () => {
             <Input
                 placeholder="Search for a country..."
                 className="px-12 md:px-14 w-full max-w-96"
+                onChange={onChange}
+                value={value}
             />
         </div>
     );

@@ -9,6 +9,7 @@ type TProps = {
     region: string;
     capital: string;
     imageSrc: string;
+    imageAlt: string;
 };
 
 export const CountryCard = ({
@@ -17,6 +18,7 @@ export const CountryCard = ({
     name,
     population,
     region,
+    imageAlt,
 }: TProps) => {
     const router = useRouter();
 
@@ -26,14 +28,14 @@ export const CountryCard = ({
 
     return (
         <div
-            className="shadow-md hover:scale-[102%] transition cursor-pointer w-full"
+            className="shadow-md hover:scale-[102%] transition cursor-pointer w-full border dark:border-dark-blue"
             onClick={onClickCard}
         >
-            <div className="overflow-hidden rounded-t-md max-h-[250px]">
+            <div className="overflow-hidden rounded-t-md">
                 <img
                     src={imageSrc}
-                    alt="country flag"
-                    className="w-full object-contain"
+                    alt={imageAlt}
+                    className="w-full h-48 object-cover object-center"
                     height={300}
                 />
             </div>

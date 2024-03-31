@@ -1,9 +1,9 @@
+import { NavigationBar } from "@/components/organisms/NavigationBar";
+import { ThemeProvider } from "@/components/templates/ThemeProvider";
+import { cn } from "@/utils/cn";
 import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/templates/ThemeProvider";
-import { NavigationBar } from "@/components/organisms/NavigationBar";
-import { cn } from "@/utils/cn";
 
 const nunito = Nunito_Sans({ subsets: ["latin"] });
 
