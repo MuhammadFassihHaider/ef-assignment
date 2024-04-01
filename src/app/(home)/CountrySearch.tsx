@@ -1,7 +1,7 @@
 "use client";
 import { ChangeEventHandler, memo } from "react";
-import { Input } from "../atoms/Input";
-import { MagnifierIcon } from "../atoms/MagnifierIcon";
+import { Input } from "../../components/atoms/Input";
+import { MagnifierIcon } from "../../components/atoms/MagnifierIcon";
 
 type TProps = {
     value: string;

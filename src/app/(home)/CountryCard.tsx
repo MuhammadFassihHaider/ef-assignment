@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { StatRow } from "../atoms/StatRow";
+import { StatRow } from "../../components/atoms/StatRow";
 import { useCallback } from "react";
 import Image from "next/image";
 

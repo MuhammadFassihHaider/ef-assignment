@@ -1,11 +1,11 @@
 "use client";
-import { CountryCard } from "@/components/molecules/CountryCard";
-import { CountrySearch } from "@/components/molecules/CountrySearch";
 import { Dropdown } from "@/components/molecules/Dropdown";
 import { useDebounce } from "@/hooks/useDebounce";
 import { Regions } from "@/utils/constants";
 import { formatPopulation } from "@/utils/formatPopulation";
 import { ChangeEventHandler, useCallback, useMemo, useState } from "react";
+import { CountryCard } from "./CountryCard";
+import { CountrySearch } from "./CountrySearch";
 
 type TProps = {
     countries: TCountries;
