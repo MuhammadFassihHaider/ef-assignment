@@ -5,7 +5,7 @@ import { memo, useEffect, useState } from "react";
 
 import { ThemeSwitchButton } from "../atoms/ThemeSwitchButton";
 
-export const ThemeSwitcher = memo(() => {
+export const ThemeSwitcherUnMemo = () => {
     const [mounted, setMounted] = useState(false);
     const { resolvedTheme } = useTheme();
 
@@ -22,4 +22,6 @@ export const ThemeSwitcher = memo(() => {
     if (resolvedTheme === "light") {
         return <ThemeSwitchButton themeToSet="dark" />;
     }
-});
+};
+
+export const ThemeSwitcher = memo(ThemeSwitcherUnMemo);

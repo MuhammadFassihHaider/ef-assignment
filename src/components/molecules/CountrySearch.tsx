@@ -8,7 +8,7 @@ type TProps = {
     onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
-export const CountrySearch = memo(({ onChange, value }: TProps) => {
+export const CountrySearchUnMemo = ({ onChange, value }: TProps) => {
     return (
         <div className="relative mb-10">
             {/* Intentionally kept the paddings around search small */}
@@ -22,4 +22,6 @@ export const CountrySearch = memo(({ onChange, value }: TProps) => {
             />
         </div>
     );
-});
+};
+
+export const CountrySearch = memo(CountrySearchUnMemo);

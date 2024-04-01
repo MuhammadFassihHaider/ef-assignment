@@ -8,7 +8,7 @@ type TProps = {
     themeToSet: "light" | "dark";
 };
 
-export const ThemeSwitchButton = memo(({ themeToSet }: TProps) => {
+export const ThemeSwitchButtonUnMemo = ({ themeToSet }: TProps) => {
     const { setTheme } = useTheme();
 
     const Icon = useMemo(
@@ -30,4 +30,6 @@ export const ThemeSwitchButton = memo(({ themeToSet }: TProps) => {
             <span className={"min-w-[93px] md:text-lg"}>{label} Mode</span>
         </button>
     );
-});
+};
+
+export const ThemeSwitchButton = memo(ThemeSwitchButtonUnMemo);
