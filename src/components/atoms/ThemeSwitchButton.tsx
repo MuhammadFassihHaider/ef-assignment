@@ -1,6 +1,6 @@
 "use client";
 import { useTheme } from "next-themes";
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 import { MoonIconFill } from "./MoonIconFill";
 import { MoonIconOutline } from "./MoonIconOutline";
 
@@ -8,7 +8,7 @@ type TProps = {
     themeToSet: "light" | "dark";
 };
 
-export const ThemeSwitchButton = ({ themeToSet }: TProps) => {
+export const ThemeSwitchButton = memo(({ themeToSet }: TProps) => {
     const { setTheme } = useTheme();
 
     const Icon = useMemo(
@@ -30,4 +30,4 @@ export const ThemeSwitchButton = ({ themeToSet }: TProps) => {
             <span className={"min-w-[93px] md:text-lg"}>{label} Mode</span>
         </button>
     );
-};
+});

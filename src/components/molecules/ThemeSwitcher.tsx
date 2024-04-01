@@ -1,18 +1,18 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 import { ThemeSwitchButton } from "../atoms/ThemeSwitchButton";
 
-export const ThemeSwitcher = () => {
+export const ThemeSwitcher = memo(() => {
     const [mounted, setMounted] = useState(false);
     const { resolvedTheme } = useTheme();
 
     useEffect(() => setMounted(true), []);
 
     if (!mounted) {
-        return <p>Loading...</p>;
+        return <></>;
     }
 
     if (resolvedTheme === "dark") {
@@ -22,4 +22,4 @@ export const ThemeSwitcher = () => {
     if (resolvedTheme === "light") {
         return <ThemeSwitchButton themeToSet="dark" />;
     }
-};
+});

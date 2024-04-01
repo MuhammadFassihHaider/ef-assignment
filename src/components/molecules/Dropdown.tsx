@@ -1,7 +1,7 @@
 "use client";
 import { useClickOutsideDropdown } from "@/hooks/useOnClickOutside";
 import { cn } from "@/utils/cn";
-import { ComponentProps, useCallback, useRef, useState } from "react";
+import { ComponentProps, memo, useCallback, useRef, useState } from "react";
 import { ChevronUpIcon } from "../atoms/ChevronUpIcon";
 
 type TTriggerProps = Omit<ComponentProps<"button">, "children"> & {
@@ -18,7 +18,7 @@ type TProps = {
     selectedValue: string;
 };
 
-export const Dropdown = ({
+const DropdownUnMemo = ({
     dropdownItems,
     triggerProps,
     onClick,
@@ -86,3 +86,4 @@ export const Dropdown = ({
         </div>
     );
 };
+export const Dropdown = memo(DropdownUnMemo);

@@ -1,5 +1,5 @@
 "use client";
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler, memo } from "react";
 import { Input } from "../atoms/Input";
 import { MagnifierIcon } from "../atoms/MagnifierIcon";
 
@@ -8,7 +8,7 @@ type TProps = {
     onChange: ChangeEventHandler<HTMLInputElement>;
 };
 
-export const CountrySearch = ({ onChange, value }: TProps) => {
+export const CountrySearch = memo(({ onChange, value }: TProps) => {
     return (
         <div className="relative mb-10">
             {/* Intentionally kept the paddings around search small */}
@@ -22,4 +22,4 @@ export const CountrySearch = ({ onChange, value }: TProps) => {
             />
         </div>
     );
-};
+});
