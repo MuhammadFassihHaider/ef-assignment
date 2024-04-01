@@ -1,8 +1,8 @@
 import { BackButton } from "@/components/molecules/BackButton";
 import { ContentTemplate } from "@/components/templates/ContentTemplate";
 import { formatPopulation } from "@/utils/formatPopulation";
-import { getCountryByCountryCode } from "@/utils/getCountryByCountryCode";
-import { getCountryByName } from "@/utils/getCountryByName";
+import { getCountryByCountryCode } from "@/api-functions/getCountryByCountryCode";
+import { getCountryByName } from "@/api-functions/getCountryByName";
 import { BorderCountryChips } from "./BorderCountryChips";
 import { CountryFlag } from "./CountryFlag";
 import { CountryStats } from "./CountryStats";

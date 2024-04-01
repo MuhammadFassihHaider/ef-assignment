@@ -1,5 +1,5 @@
 import { ContentTemplate } from "@/components/templates/ContentTemplate";
-import { getAllCountries } from "@/utils/getAllCountries";
+import { getAllCountries } from "@/api-functions/getAllCountries";
 import { HomeMainContent } from "./HomeMainContent";
 import { customError } from "@/utils/customError";
 
