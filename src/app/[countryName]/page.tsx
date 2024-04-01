@@ -27,42 +27,35 @@ export default async function CountryDetails(context: TContext) {
         throw customError("Bad request!", 400);
     }
 
+    const countryName = decodeURIComponent(context?.params?.countryName);
+
     let countryDetails: TCountry | null = null;
 
     try {
-        const response = await getCountryByName(context.params.countryName);
+        //	=======================================================================
+        //      I had first implemented to get country by name, if it does
+        //      not exist, to get the country by code. Reason was what if
+        //      there is a country with a name that is only 3 letters long.
+        //      I have changed the implementation. Now, I call the endpoint
+        //      that only looks for exact name instead of common general search.
+        //      This saves me calling 2 endpoints.
+        //      The con of this is that if the user changes the endpoint by
+        //      themselves, it will error out.
+        //	=======================================================================
+        const functionToCall =
+            countryName.length === 3
+                ? getCountryByCountryCode(countryName)
+                : getCountryByName(countryName);
+
+        const response = await functionToCall;
 
         if (response.hasError) {
-            countryDetails = null;
-        } else {
-            countryDetails = response.data;
+            throw customError(response.message, response.code);
         }
+
+        countryDetails = response.data;
     } catch (error) {
-        countryDetails = null;
-    }
-
-    //	=======================================================================
-    //		Handle error if fail to get country details by country name.
-    //      Try with country code. Reason is explained below. I could just
-    //      check if the length of the string is 3, that means it is country
-    //      code. It would save an API request I do not know any country name
-    //      with only three letters but seems risky
-    //	=======================================================================
-
-    if (!countryDetails) {
-        try {
-            const response = await getCountryByCountryCode(
-                context.params.countryName
-            );
-
-            if (response.hasError) {
-                throw customError(response.message, response.code);
-            }
-
-            countryDetails = response.data;
-        } catch (error) {
-            throw customError("Something went wrong!", 500);
-        }
+        throw customError("Something went wrong!", 500);
     }
 
     const nativeNames = Object.values(countryDetails.name.nativeName)
@@ -111,7 +104,7 @@ export default async function CountryDetails(context: TContext) {
                         currencies={currencies}
                         languages={languages}
                     />
-                    {countryDetails.borders.length > 1 && (
+                    {countryDetails?.borders?.length > 1 && (
                         <BorderCountryChips
                             borderCountries={countryDetails.borders}
                         />

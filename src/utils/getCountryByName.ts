@@ -3,7 +3,7 @@ export const getCountryByName = async (
 ): Promise<TError<TCountry>> => {
     try {
         const response = await fetch(
-            `https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,flags,subregion,currencies,languages,flag,borders,tld,region`
+            `https://restcountries.com/v3.1/name/${name}?fullText=truefields=name,capital,population,flags,subregion,currencies,languages,borders,tld,region,ccn3`
         );
 
         if (!response.ok) {
@@ -24,7 +24,16 @@ export const getCountryByName = async (
                 message: "Something went wrong!",
             };
         }
-        return { data: data[0], hasError: false };
+        const closestCountryToName = data.find(
+            (country) =>
+                country.name.official.toLowerCase() === name.toLowerCase()
+        );
+
+        if (closestCountryToName) {
+            return { data: closestCountryToName, hasError: false };
+        } else {
+            return { data: data[0], hasError: false };
+        }
     } catch (error) {
         console.log(error);
         return {

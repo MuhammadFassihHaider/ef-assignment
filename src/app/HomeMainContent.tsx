@@ -58,7 +58,8 @@ export const HomeMainContent = ({ countries }: TProps) => {
                 key={country.name.common}
                 imageSrc={country.flags.svg}
                 imageAlt={country.flags.alt}
-                name={country.name.common}
+                commonName={country.name.common}
+                officialName={country.name.official}
                 capital={country.capital[0]}
                 population={formatPopulation(country.population.toString())}
                 region={country.region}

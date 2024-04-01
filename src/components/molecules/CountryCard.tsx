@@ -5,7 +5,8 @@ import { useCallback } from "react";
 import Image from "next/image";
 
 type TProps = {
-    name: string;
+    commonName: string;
+    officialName: string;
     population: string;
     region: string;
     capital: string;
@@ -16,7 +17,8 @@ type TProps = {
 export const CountryCard = ({
     capital,
     imageSrc,
-    name,
+    commonName,
+    officialName,
     population,
     region,
     imageAlt,
@@ -24,8 +26,8 @@ export const CountryCard = ({
     const router = useRouter();
 
     const onClickCard = useCallback(() => {
-        router.push(name);
-    }, [name, router]);
+        router.push(officialName);
+    }, [officialName, router]);
 
     return (
         <div
@@ -41,7 +43,9 @@ export const CountryCard = ({
                 />
             </div>
             <div className="p-6 dark:bg-dark-blue rounded-b-md h-full">
-                <h3 className="text-lg font-bold mb-4 md:text-xl">{name}</h3>
+                <h3 className="text-lg font-bold mb-4 md:text-xl">
+                    {commonName}
+                </h3>
                 <StatRow title="Population" value={population} />
                 <StatRow title="Region" value={region} />
                 <StatRow title="Capital" value={capital} />
