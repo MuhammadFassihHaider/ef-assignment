@@ -74,14 +74,16 @@ export const HomeMainContent = ({ countries }: TProps) => {
 
     return (
         <>
-            <CountrySearch value={search} onChange={onChangeSearch} />
-            <Dropdown
-                triggerProps={{ placeholder: "Filter by Region" }}
-                containerProps={{ className: "mb-6 md:self-end" }}
-                dropdownItems={Regions}
-                onClick={onSelectDropdown}
-                selectedValue={dropdownValue}
-            />
+            <div className="flex flex-col md:flex-row md:justify-between mb-8">
+                <CountrySearch value={search} onChange={onChangeSearch} />
+                <Dropdown
+                    triggerProps={{ placeholder: "Filter by Region" }}
+                    containerProps={{ className: " md:self-end" }}
+                    dropdownItems={Regions}
+                    onClick={onSelectDropdown}
+                    selectedValue={dropdownValue}
+                />
+            </div>
 
             <section className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:grid-cols-4">
                 {countriesToRender}

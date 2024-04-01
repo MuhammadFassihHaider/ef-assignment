@@ -10,7 +10,7 @@ type TProps = {
 
 export const CountrySearchUnMemo = ({ onChange, value }: TProps) => {
     return (
-        <div className="relative mb-10">
+        <div className="relative mb-4 md:mb-0 p-0">
             {/* Intentionally kept the paddings around search small */}
             {/* I did not like the padding-x to padding-y ratio in the resource picture */}
             <MagnifierIcon className="absolute top-1/2 transform -translate-y-1/2 left-4 md:left-5" />

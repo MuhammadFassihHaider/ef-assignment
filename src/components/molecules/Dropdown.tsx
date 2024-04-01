@@ -39,7 +39,7 @@ const DropdownUnMemo = ({
             {...containerProps}
             ref={itemsContainerRef}
             className={cn(
-                "relative max-w-max lg:max-w-none lg:min-w-[230px]",
+                "relative lg:max-w-none lg:min-w-[230px] ",
                 containerProps?.className
             )}
         >
@@ -47,7 +47,7 @@ const DropdownUnMemo = ({
                 onClick={() => setOpen((prev) => !prev)}
                 {...triggerProps}
                 className={cn(
-                    "flex items-center justify-between py-3 md:py-4 px-4 md:px-5 rounded-md shadow-md dark:bg-dark-blue w-48 text-gray-400 md:text-lg text-nowrap lg:min-w-[230px]",
+                    "flex items-center justify-between py-3 md:py-4 px-4 md:px-5 rounded-md shadow-md dark:bg-dark-blue md:w-48 text-gray-400 md:text-lg text-nowrap lg:min-w-[230px] w-full",
                     triggerProps.className
                 )}
             >
@@ -63,7 +63,7 @@ const DropdownUnMemo = ({
             {open && (
                 <div
                     className={cn(
-                        "absolute min-h-[48px] rounded-md shadow-md dark:bg-dark-blue mt-1.5 w-48 z-50 flex flex-col lg:min-w-[230px] bg-white"
+                        "absolute min-h-[48px] rounded-md shadow-md dark:bg-dark-blue mt-1.5 md:w-48 z-50 flex flex-col lg:min-w-[230px] bg-white w-full"
                     )}
                 >
                     <ul>
