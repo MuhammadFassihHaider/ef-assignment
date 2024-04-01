@@ -8,10 +8,19 @@ import { CountryFlag } from "./CountryFlag";
 import { CountryStats } from "./CountryStats";
 // import { notFound } from "next/navigation";
 import { customError } from "@/utils/customError";
+import { Metadata } from "next";
 
 type TContext = {
     params?: { countryName?: string };
 };
+
+export async function generateMetadata({
+    params,
+}: TContext): Promise<Metadata> {
+    return {
+        title: params?.countryName,
+    };
+}
 
 export default async function CountryDetails(context: TContext) {
     if (!context?.params?.countryName) {
@@ -102,9 +111,11 @@ export default async function CountryDetails(context: TContext) {
                         currencies={currencies}
                         languages={languages}
                     />
-                    <BorderCountryChips
-                        borderCountries={countryDetails.borders}
-                    />
+                    {countryDetails.borders.length > 1 && (
+                        <BorderCountryChips
+                            borderCountries={countryDetails.borders}
+                        />
+                    )}
                 </div>
             </section>
         </ContentTemplate>
