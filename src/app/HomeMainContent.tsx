@@ -5,7 +5,7 @@ import { Dropdown } from "@/components/molecules/Dropdown";
 import { useDebounce } from "@/hooks/useDebounce";
 import { Regions } from "@/utils/constants";
 import { formatPopulation } from "@/utils/formatPopulation";
-import { ChangeEventHandler, useCallback, useState } from "react";
+import { ChangeEventHandler, useCallback, useMemo, useState } from "react";
 
 type TProps = {
     countries: TCountries;
@@ -19,7 +19,7 @@ export const HomeMainContent = ({ countries }: TProps) => {
 
     const onChangeSearch: ChangeEventHandler<HTMLInputElement> = useCallback(
         (e) => {
-            setSearch(e.target.value);
+            setSearch(e.target.value.trim());
         },
         [setSearch]
     );
@@ -35,37 +35,42 @@ export const HomeMainContent = ({ countries }: TProps) => {
         [setDropdownValue, dropdownValue]
     );
 
-    let countriesWithFilters = countries;
-    if (dropdownValue) {
-        countriesWithFilters = countriesWithFilters.filter((country) =>
-            country.region?.toLowerCase().includes(dropdownValue.toLowerCase())
-        );
-    }
+    const countriesWithFilters = useMemo(() => {
+        const debouncedSearchLowerCased = debouncedSearch?.toLowerCase();
+        return countries.filter((country) => {
+            // filter search value in common name & official name
+            const nameMatch =
+                country?.name?.common
+                    ?.toLowerCase()
+                    ?.includes(debouncedSearchLowerCased) ||
+                country.name.official
+                    .toLowerCase()
+                    .includes(debouncedSearchLowerCased);
 
-    if (debouncedSearch) {
-        countriesWithFilters = countriesWithFilters.filter((country) =>
-            country.name.common
-                .toLowerCase()
-                .includes(debouncedSearch.toLowerCase())
-        );
-    }
+            // filter country by region
+            const regionMatch = country?.region
+                ?.toLowerCase()
+                ?.includes(dropdownValue.toLowerCase());
+            return nameMatch && regionMatch;
+        });
+    }, [dropdownValue, debouncedSearch, countries]);
 
-    // TODO: add pagination
-
-    const countriesToRender = countriesWithFilters.map((country) => {
-        return (
-            <CountryCard
-                key={country.name.common}
-                imageSrc={country.flags.svg}
-                imageAlt={country.flags.alt}
-                commonName={country.name.common}
-                officialName={country.name.official}
-                capital={country.capital[0]}
-                population={formatPopulation(country.population.toString())}
-                region={country.region}
-            />
-        );
-    });
+    const countriesToRender = useMemo(() => {
+        return countriesWithFilters.map((country) => {
+            return (
+                <CountryCard
+                    key={country.name.common}
+                    imageSrc={country.flags.svg}
+                    imageAlt={country.flags.alt}
+                    commonName={country.name.common}
+                    officialName={country.name.official}
+                    capital={country.capital[0]}
+                    population={formatPopulation(country.population.toString())}
+                    region={country.region}
+                />
+            );
+        });
+    }, [countriesWithFilters]);
 
     return (
         <>
