@@ -38,6 +38,7 @@ const DropdownUnMemo = ({
         <div
             {...containerProps}
             ref={itemsContainerRef}
+            data-test="region-dropdown-trigger"
             className={cn(
                 "relative lg:max-w-none lg:min-w-[230px] ",
                 containerProps?.className
@@ -65,6 +66,7 @@ const DropdownUnMemo = ({
                     className={cn(
                         "absolute min-h-[48px] rounded-md shadow-md dark:bg-dark-blue mt-1.5 md:w-48 z-50 flex flex-col lg:min-w-[230px] bg-white w-full"
                     )}
+                    data-test="region-dropdown-item-container"
                 >
                     <ul>
                         {dropdownItems.map(({ key, value }) => (

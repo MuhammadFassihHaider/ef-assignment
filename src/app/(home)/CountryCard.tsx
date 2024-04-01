@@ -33,6 +33,7 @@ export const CountryCard = ({
         <div
             className="shadow-md hover:scale-[102%] transition cursor-pointer w-full border dark:border-dark-blue rounded-md overflow-hidden"
             onClick={onClickCard}
+            data-test={commonName}
         >
             <div className="overflow-hidden rounded-t-md w-full h-48 relative">
                 <Image
