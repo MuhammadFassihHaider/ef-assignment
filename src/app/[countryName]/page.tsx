@@ -92,7 +92,7 @@ export default async function CountryDetails(context: TContext) {
                     imageSrc={countryDetails.flags.svg}
                     imageAlt={countryDetails.flags.alt}
                 />
-                <div>
+                <div className="w-full lg:w-1/2">
                     <CountryStats
                         name={countryDetails.name.common}
                         nativeName={nativeNames}
