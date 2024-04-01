@@ -46,6 +46,8 @@ I deviated from the font sizes provided and used what I thought looked better.
 
 ## Explanation of code choices
 
+The best standards to follow and implement are the ones used by the team. However, since I was the only person working on this project, I implemented my favorite and tested standards.
+
 ### Commits
 
 I used [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for project's version control commit messages.
@@ -70,16 +72,24 @@ I opted not to utilize a component library for this project due to its relativel
 
 I've implemented error handling in a manner inspired by Rust and Go practices, where errors are treated as values and handled explicitly within the codebase.
 
-### Issues that I am aware of
+## Issues that I am aware of
 
-#### Border country names
+### Border country names
 
 The country details page does not show the names of the border countries, rather their codes. I could not get the country names from the codes because the endpoint (https://restcountries.com/#endpoints-code) is probably rate limited.
 It would probably be possible to get the country names by adding time between API calls (I was using Promise.all and sending all the request at the same time).
 
-#### No pagination
+### No pagination
 
 I'm aware that pagination is currently not implemented on the home page. Unfortunately, the REST Country endpoints do not support pagination as far as I can tell. While I considered creating a custom Next.js endpoint to enable pagination, time constraints prevented me from implementing this solution.
+
+### Test cases
+
+The E2E test cases are primitive and inadequate. I have written unit and integration test cases utilizing "Mocha with Chai". I have not written E2E test cases and this was my first go at Cypress and E2E.
+
+The current test suite could certainly benefit from enhancements in both quality and coverage, time constraints however have prevented me from further refining it at this stage.
+
+The current implementation is just an example of how I would have written the test cases.
 
 ### Example of code that I own that uses Atomic Design, Next.js, Tailwind, Redux Toolkit, Redux Toolkit Query
 
